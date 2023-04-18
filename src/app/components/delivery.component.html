@@ -1,0 +1,89 @@
+<form [formGroup]="form" (ngSubmit)="processDelivery()">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <input type="text" size="30" formControlName="name">
+                <span *ngIf="hasError('name')">
+                    Please enter your name
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>
+                <input type="text" size="30" formControlName="address">
+                <span *ngIf="hasError('address')">
+                    Please enter your address
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type="email" size="30" formControlName="email">
+                <span *ngIf="hasError('email')">
+                    Please enter your email
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Delivery date:</td>
+            <td>
+                <input type="date" size="30" formControlName="deliveryDate">
+                <span *ngIf="hasError('deliveryDate')">
+                    Please enter your email
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Session</td>
+            <td>
+                AM<input type="radio" name="session" value="AM" formControlName="session">
+                PM<input type="radio" name="session" value="PM" formControlName="session">
+            </td>
+        </tr>
+        <tr>
+            <td>Options:</td>
+            <td>
+                Insurance<input type="checkbox" value="insurance" formControlName="insurance">
+                Piority<input type="checkbox" value="priority" formControlName="priority">
+            </td>
+        </tr>
+        <tr>
+            <td>Comments</td>
+            <td>
+                <textarea cols="30" rows="3" formControlName="comments"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="Submit" [disabled]="isFormInvalid()">Place Order</button>
+            </td>
+            <td>
+                <button type="button" (click)="addItem()">Add Item</button>
+            </td>
+        </tr>
+    </table>
+
+    <div *ngIf="itemArray.length>0; else noItems">
+        <h2>Items</h2>
+        <table formArrayName="items">
+            <tr *ngFor="let i of itemArray.controls; let idx = index" [formGroupName]="idx">
+                <td>
+                    <input type="text" size="30" placeholder="Order" formControlName="item">
+                </td>
+                <td>
+                    <input type="number" size="5" placeholder="Quantity" formControlName="quantity">
+                </td>
+                <td>
+                    <button (click)="deleteItem(idx)">X</button>
+                  </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<ng-template #noItems>
+    <h3>Your order has no items</h3>
+</ng-template>

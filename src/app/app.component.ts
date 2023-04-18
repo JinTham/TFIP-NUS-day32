@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DeliveryOrder } from './models';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'day32';
+
+  orders:DeliveryOrder[] = []
+
+  processNewOrder(order:DeliveryOrder) {
+    this.orders.unshift(order)
+  }
 }
