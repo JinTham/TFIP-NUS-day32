@@ -43,7 +43,6 @@ export class DeliveryComponent implements OnInit {
     const delivery = this.form.value as DeliveryOrder
     console.info(">>> delivery: ",delivery)
     this.onNewDeliveryOrder.next(delivery)
-    console.info(delivery)
     this.form.reset()
   }
 
